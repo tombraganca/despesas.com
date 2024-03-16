@@ -1,7 +1,7 @@
 import { RefreshToken } from "../../entities/RefreshToken";
-import { IRefreshTokenRepository } from "../../repositories/IRefreshTokenRepository";
+import { RefreshTokenRepository } from "../../repositories/IRefreshTokenRepository";
 
-export class InMemoryRefreshTokenRepository implements IRefreshTokenRepository {
+export class InMemoryRefreshTokenRepository implements RefreshTokenRepository {
     private refreshToken: RefreshToken[] = [];
 
     async findByRefreshToken(refreshToken: string): Promise<RefreshToken | null> {

@@ -1,7 +1,7 @@
-import { Expense } from "@prisma/client";
-import { IExpenseRepository } from "../../repositories/IExpenseRepository";
+import { ExpenseRepository } from "../../repositories/IExpenseRepository";
+import { Expense } from "../../entities/Expense";
 
-export class InMemoryExpenseRepository implements IExpenseRepository {
+export class InMemoryExpenseRepository implements ExpenseRepository {
   private expenses: Expense[] = [];
 
   async save(expense: Expense): Promise<void> {
@@ -12,10 +12,16 @@ export class InMemoryExpenseRepository implements IExpenseRepository {
     return this.expenses.filter((expense) => expense.userId === userId);
   }
 
-  async update(expense: Expense): Promise<void> {
+  async findById(id: string) {
+    return this.expenses.find((expense) => expense.id === id) ?? null;
+  }
+
+  async update(expense: Expense): Promise<Expense> {
     this.expenses = this.expenses.map((_expense) =>
       _expense.id === expense.id ? expense : _expense
     );
+
+    return expense;
   }
 
   async delete(id: string): Promise<void> {

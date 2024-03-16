@@ -1,8 +1,8 @@
 
 import { User } from "../../entities/User";
-import { IUserRepository } from "../../repositories/IUserRepository";
+import { UserRepository } from "../../repositories/IUserRepository";
 
-export class InMemoryUserRepository implements IUserRepository {
+export class InMemoryUserRepository implements UserRepository {
     private users: User[] = [];
 
     async findByEmail(email: string): Promise<User> {
