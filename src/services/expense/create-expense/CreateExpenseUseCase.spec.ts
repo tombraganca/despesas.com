@@ -136,6 +136,35 @@ describe("CreateExpenseUseCase", () => {
     }
   });
 
+  it("should not be able to create an expense with invalid title", async () => {
+    const inMemoryExpenseRepository = new InMemoryExpenseRepository();
+    const inMemoryUserRepository = new InMemoryUserRepository();
+    const mailTestProvider = new MailTestProvider();
+
+    await inMemoryUserRepository.save(user);
+
+    const data: CreateExpenseRequestDTO = {
+      description: "Test expense",
+      date: "2021-10-10",
+      amount: 100,
+      title: Array(200).fill("a").join(""),
+      userId: user.id,
+    };
+
+    const createExpenseUseCase = new CreateExpenseUseCase(
+      inMemoryUserRepository,
+      inMemoryExpenseRepository,
+      mailTestProvider
+    );
+
+    try {
+      await createExpenseUseCase.execute(data);
+    } catch (error: HttpException | any) {
+      expect(error.message).toBe("Title should not be longer than 191 characters");
+      expect(error.statusCode).toBe(400);
+    }
+  });
+
   it("shoul not be able to create an expense with negative value", async () => {
     const inMemoryExpenseRepository = new InMemoryExpenseRepository();
     const inMemoryUserRepository = new InMemoryUserRepository();

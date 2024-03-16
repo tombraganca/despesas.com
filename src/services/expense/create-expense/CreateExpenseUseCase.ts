@@ -5,14 +5,14 @@ import {
   TEMPLATE_EMAIL,
   TEMPLATE_EMAIL_ESPENSE,
 } from "../../../providers/configs/TempleteEmail";
-import { IExpenseRepository } from "../../../repositories/IExpenseRepository";
-import { IUserRepository } from "../../../repositories/IUserRepository";
+import { ExpenseRepository } from "../../../repositories/IExpenseRepository";
+import { UserRepository } from "../../../repositories/IUserRepository";
 import { CreateExpenseRequestDTO } from "./CreateExpenseDTO";
 
 export class CreateExpenseUseCase {
   constructor(
-    private userRepository: IUserRepository,
-    private expenseRepository: IExpenseRepository,
+    private userRepository: UserRepository,
+    private expenseRepository: ExpenseRepository,
     private mailProvider: IMailProvider
   ) {}
 

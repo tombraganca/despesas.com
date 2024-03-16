@@ -17,6 +17,8 @@ export class Expense {
     if (!id) {
       this.id = uuid();
       this.createdAt = new Date();
+    } else {
+      this.id = id;
     }
 
     // se tiver mais de 191 caracteres retorna erro
