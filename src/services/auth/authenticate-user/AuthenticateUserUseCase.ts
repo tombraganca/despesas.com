@@ -1,17 +1,17 @@
 
 import { User } from "../../../entities/User";
 import { IGenerateTokenProvider } from "../../../providers/IGenerateTokenProvider";
-import { IUserRepository } from "../../../repositories/IUserRepository";
+import { UserRepository } from "../../../repositories/IUserRepository";
 import { CreateUserRequestDTO } from "./AuthenticateUserDTO";
 import { RefreshToken } from "../../../entities/RefreshToken";
 import { IGenerateRefreshTokenProvider } from "../../../providers/IGenerateRefreshTokenProvider";
-import { IRefreshTokenRepository } from "../../../repositories/IRefreshTokenRepository";
+import { RefreshTokenRepository } from "../../../repositories/IRefreshTokenRepository";
 import { HttpException } from "../../../handler/HttpErro";
 
 export class AuthenticateUserUseCase {
     constructor(
-        private userRepository: IUserRepository,
-        private refreshTokenRepository: IRefreshTokenRepository,
+        private userRepository: UserRepository,
+        private refreshTokenRepository: RefreshTokenRepository,
         private refreshTokenProvider: IGenerateRefreshTokenProvider,
         private tokenProvider: IGenerateTokenProvider,
     ) { }

@@ -1,8 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import { User } from "../../entities/User";
-import { IUserRepository } from "../IUserRepository";
+import { UserRepository } from "../IUserRepository";
 
-export class PrismaUsersRepository implements IUserRepository {
+export class PrismaUsersRepository implements UserRepository {
     private connection: PrismaClient;
 
     constructor() {

@@ -1,8 +1,8 @@
 import { PrismaClient } from "@prisma/client";
-import { IExpenseRepository } from "../IExpenseRepository";
+import { ExpenseRepository } from "../IExpenseRepository";
 import { Expense } from "../../entities/Expense";
 
-export class PrismaExpenseRepository implements IExpenseRepository {
+export class PrismaExpenseRepository implements ExpenseRepository {
   private connection: PrismaClient;
 
   constructor() {
@@ -18,7 +18,7 @@ export class PrismaExpenseRepository implements IExpenseRepository {
         amount: expense.amount,
         date: expense.date,
         userId: expense.userId,
-        createdAt: expense.createdAt
+        createdAt: expense.createdAt,
       },
     });
   }
@@ -31,8 +31,16 @@ export class PrismaExpenseRepository implements IExpenseRepository {
     });
   }
 
+  findById(id: string) {
+    return this.connection.expense.findUnique({
+      where: {
+        id,
+      },
+    });
+  }
+
   async update(expense: Expense) {
-    await this.connection.expense.update({
+    return this.connection.expense.update({
       where: {
         id: expense.id,
       },

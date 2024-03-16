@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { IRefreshTokenRepository } from "../../../repositories/IRefreshTokenRepository";
+import { RefreshTokenRepository } from "../../../repositories/IRefreshTokenRepository";
 import { RefreshTokenUserDTO } from "./RefreshTokenUserDTO";
 import { IGenerateRefreshTokenProvider } from "../../../providers/IGenerateRefreshTokenProvider";
 import { IGenerateTokenProvider } from "../../../providers/IGenerateTokenProvider";
@@ -11,7 +11,7 @@ import { HttpException } from "../../../handler/HttpErro";
 export class RefreshTokenUserUseCase {
 
     constructor(
-        private refreshTokenRepository: IRefreshTokenRepository,
+        private refreshTokenRepository: RefreshTokenRepository,
         private generateTokenProvider: IGenerateTokenProvider,
         private generateRefreshTokenProvider: IGenerateRefreshTokenProvider
     ) { }

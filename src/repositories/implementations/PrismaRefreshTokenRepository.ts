@@ -1,8 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import { RefreshToken } from "../../entities/RefreshToken";
-import { IRefreshTokenRepository } from "../IRefreshTokenRepository";
+import { RefreshTokenRepository } from "../IRefreshTokenRepository";
 
-export class PostgresRefreshTokenRepository implements IRefreshTokenRepository {
+export class PostgresRefreshTokenRepository implements RefreshTokenRepository {
     private connection: PrismaClient
 
     constructor() {

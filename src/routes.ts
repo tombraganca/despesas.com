@@ -5,6 +5,8 @@ import { refreshTokenUserController } from "./services/auth/refresh-token-user";
 import { MiddlewareAuth } from "./middleware/MiddlewareAuth";
 import { createExpenseController } from "./services/expense/create-expense";
 import { listExpenseController } from "./services/expense/list-expense";
+import { updateExpenseController } from "./services/expense/update-expense";
+import { deleteExpenseController } from "./services/expense/delete-expense";
 
 const router = Router();
 
@@ -39,6 +41,14 @@ router.post("/expense", MiddlewareAuth, (request, response) => {
 
 router.get("/expense", MiddlewareAuth, (request, response) => {
   return listExpenseController.handle(request, response);
+});
+
+router.put("/expense/:id", MiddlewareAuth, (request, response) => {
+  return updateExpenseController.handle(request, response);
+});
+
+router.delete("/expense/:id", MiddlewareAuth, (request, response) => {
+  return deleteExpenseController.handle(request, response);
 });
 
 export { router };

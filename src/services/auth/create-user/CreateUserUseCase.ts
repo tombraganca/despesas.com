@@ -2,12 +2,12 @@ import { User } from "../../../entities/User";
 import { HttpException } from "../../../handler/HttpErro";
 import { IMailProvider } from "../../../providers/IMailProvider";
 import { TEMPLATE_EMAIL } from "../../../providers/configs/TempleteEmail";
-import { IUserRepository } from "../../../repositories/IUserRepository";
+import { UserRepository } from "../../../repositories/IUserRepository";
 import { CreateUserRequestDTO } from "./CreateUserDTO";
 
 export class CreateUserUseCase {
   constructor(
-    private userRepository: IUserRepository,
+    private userRepository: UserRepository,
     private mailProvider: IMailProvider
   ) {}
 
