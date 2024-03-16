@@ -22,7 +22,11 @@ app.use(cors(
 app.use(express.urlencoded({ extended: true }));
 
 app.use(router);
-
+app.use(
+    '/api-docs',
+    SwaggerUi.serve,
+    SwaggerUi.setup(swaggerDocs)
+);
 
 app.get("/", (_req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
