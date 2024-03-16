@@ -1,5 +1,5 @@
 import { User } from "../../../entities/User";
-import { HttpError } from "../../../handler/HttpErro";
+import { HttpException } from "../../../handler/HttpErro";
 import { IMailProvider } from "../../../providers/IMailProvider";
 import { TEMPLATE_EMAIL } from "../../../providers/configs/TempleteEmail";
 import { IUserRepository } from "../../../repositories/IUserRepository";
@@ -13,13 +13,13 @@ export class CreateUserUseCase {
 
   async execute(data: CreateUserRequestDTO): Promise<void> {
     if (!this.emailValidate(data.email)) {
-      throw new HttpError("Invalid email.", 400);
+      throw new HttpException("Invalid email.", 400);
     }
 
     const userAlreadyExists = await this.userRepository.findByEmail(data.email);
 
     if (userAlreadyExists) {
-      throw new HttpError("User already exists.", 409);
+      throw new HttpException("User already exists.", 409);
     }
 
     const user = new User(data);

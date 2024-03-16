@@ -6,7 +6,7 @@ import { CreateUserRequestDTO } from "./AuthenticateUserDTO";
 import { RefreshToken } from "../../../entities/RefreshToken";
 import { IGenerateRefreshTokenProvider } from "../../../providers/IGenerateRefreshTokenProvider";
 import { IRefreshTokenRepository } from "../../../repositories/IRefreshTokenRepository";
-import { HttpError } from "../../../handler/HttpErro";
+import { HttpException } from "../../../handler/HttpErro";
 
 export class AuthenticateUserUseCase {
     constructor(
@@ -21,7 +21,7 @@ export class AuthenticateUserUseCase {
         const userAlreadyExists = await this.userRepository.findByEmail(data.email);
 
         if (!userAlreadyExists) {
-            throw new HttpError('Email or password incorrect.', 401);
+            throw new HttpException('Email or password incorrect.', 401);
         }
 
         const user = new User(userAlreadyExists, userAlreadyExists.id);
@@ -29,7 +29,7 @@ export class AuthenticateUserUseCase {
         const passwordMatch = await user.comparePassword(data.password);
 
         if (!passwordMatch) {
-            throw new HttpError('Email or password incorrect.', 401);
+            throw new HttpException('Email or password incorrect.', 401);
         }
 
         await this.refreshTokenRepository.deleteManyByUserId(user.id);

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { CreateUserUseCase } from "./CreateUserUseCase";
-import { HttpError } from "../../../handler/HttpErro";
+import { HttpException } from "../../../handler/HttpErro";
 
 export class CreateUserController {
   constructor(private createUserUseCase: CreateUserUseCase) {}
@@ -18,8 +18,8 @@ export class CreateUserController {
       return response
         .status(201)
         .json({ message: "User created successfully" });
-    } catch (err: HttpError | unknown) {
-      if (err instanceof HttpError) {
+    } catch (err: HttpException | unknown) {
+      if (err instanceof HttpException) {
         return response.status(err.statusCode).json({
           message: err.message || "Unexpected error.",
         });

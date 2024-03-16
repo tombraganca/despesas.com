@@ -1,13 +1,13 @@
 
 import { GenerateRefreshTokenProvider } from "../../../providers/implementations/GenerateRefreshTokenProvider";
 import { GenerateTokenProvider } from "../../../providers/implementations/GenerateTokenProvider";
-import { PostgresUsersRepository } from "../../../repositories/implementations/PostgresUserRepository";
-import { PostgresRefreshTokenRepository } from "../../../repositories/implementations/PostgresRefreshTokenRepository";
+import { PrismaUsersRepository } from "../../../repositories/implementations/PrismaUserRepository";
+import { PostgresRefreshTokenRepository } from "../../../repositories/implementations/PrismaRefreshTokenRepository";
 import { AuthenticateUserController } from "./AuthenticateUserController";
 import { AuthenticateUserUseCase } from "./AuthenticateUserUseCase";
 
 
-const userRepository = new PostgresUsersRepository();
+const userRepository = new PrismaUsersRepository();
 const refreshTokenRepository = new PostgresRefreshTokenRepository();
 
 const refreshTokenProvider = new GenerateRefreshTokenProvider();

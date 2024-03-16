@@ -27,17 +27,22 @@ export class MailTrapMailProvider implements IMailProvider {
   }
 
   async sendMail(message: IMessage): Promise<void> {
-    await this.transporter.sendMail({
-      from: {
-        name: message.from.name,
-        address: message.from.email,
-      },
-      to: {
-        name: message.to.name,
-        address: message.to.email,
-      },
-      subject: message.subject,
-      html: message.body,
-    });
+    try {
+      await this.transporter.sendMail({
+        from: {
+          name: message.from.name,
+          address: message.from.email,
+        },
+        to: {
+          name: message.to.name,
+          address: message.to.email,
+        },
+        subject: message.subject,
+        html: message.body,
+      });
+    } catch (error) {
+      console.error(error);
+      return;
+    }
   }
 }

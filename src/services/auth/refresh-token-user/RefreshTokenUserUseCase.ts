@@ -4,7 +4,7 @@ import { RefreshTokenUserDTO } from "./RefreshTokenUserDTO";
 import { IGenerateRefreshTokenProvider } from "../../../providers/IGenerateRefreshTokenProvider";
 import { IGenerateTokenProvider } from "../../../providers/IGenerateTokenProvider";
 import { RefreshToken } from "../../../entities/RefreshToken";
-import { HttpError } from "../../../handler/HttpErro";
+import { HttpException } from "../../../handler/HttpErro";
 
 
 
@@ -19,13 +19,13 @@ export class RefreshTokenUserUseCase {
     async execute({ refreshToken }: RefreshTokenUserDTO) {
 
         if (!refreshToken) {
-            throw new HttpError("Refresh token is required", 400);
+            throw new HttpException("Refresh token is required", 400);
         }
 
         const refreshTokenExists = await this.refreshTokenRepository.findByRefreshToken(refreshToken);
 
         if (!refreshTokenExists) {
-            throw new HttpError("Invalid refresh token or expired", 401);
+            throw new HttpException("Invalid refresh token or expired", 401);
         }
 
         const refreshTokenExpired = dayjs().isAfter(dayjs.unix(refreshTokenExists.expiresIn));

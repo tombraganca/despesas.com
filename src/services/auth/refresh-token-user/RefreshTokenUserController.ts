@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { RefreshTokenUserUseCase } from "./RefreshTokenUserUseCase";
-import { HttpError } from "../../../handler/HttpErro";
+import { HttpException } from "../../../handler/HttpErro";
 
 export class RefreshTokenUserController {
 
@@ -13,8 +13,8 @@ export class RefreshTokenUserController {
             const token = await this.refreshTokenUserUseCase.execute({ refreshToken });
             return response.json(token);
 
-        } catch (err: HttpError | unknown) {
-            if(err instanceof HttpError) {
+        } catch (err: HttpException | unknown) {
+            if(err instanceof HttpException) {
 
                 return response.status(401).json({
                     message: err.message

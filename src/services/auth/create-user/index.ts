@@ -1,14 +1,14 @@
 
 import { MailTrapMailProvider } from "../../../providers/implementations/MailTrapMailProvider";
-import { PostgresUsersRepository } from "../../../repositories/implementations/PostgresUserRepository";
+import { PrismaUsersRepository } from "../../../repositories/implementations/PrismaUserRepository";
 import { CreateUserController } from "./CreateUserController";
 import { CreateUserUseCase } from "./CreateUserUseCase";
 
 const mailTrapMailProvider = new MailTrapMailProvider();
-const postgresUsersProvider = new PostgresUsersRepository();
+const prismaUsersProvider = new PrismaUsersRepository();
 
 const createUserUseCase = new CreateUserUseCase(
-    postgresUsersProvider,
+    prismaUsersProvider,
     mailTrapMailProvider
 );
 

@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { User } from "../../entities/User";
 import { IUserRepository } from "../IUserRepository";
 
-export class PostgresUsersRepository implements IUserRepository {
+export class PrismaUsersRepository implements IUserRepository {
     private connection: PrismaClient;
 
     constructor() {

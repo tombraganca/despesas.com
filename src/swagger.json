@@ -16,6 +16,103 @@
     }
   ],
   "paths": {
+    "/health": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "Verifica a saúde da API",
+        "description": "Verifica se a API está funcionando corretamente",
+        "responses": {
+          "200": {
+            "description": "API está funcionando corretamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "OK"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protected": {
+      "get": {
+        "tags": [
+          "Protected"
+        ],
+        "summary": "Rota protegida",
+        "description": "Rota protegida que requer um token de acesso",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "Headers": {
+          "Authorization": {
+            "type": "string",
+            "description": "Bearer token"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Rota protegida acessada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Protected route accessed successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid token"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno no servidor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unexpected error."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/signin": {
       "post": {
         "tags": [
@@ -262,9 +359,92 @@
           }
         }
       }
+    },
+    "/expense": {
+      "post": {
+        "tags": [
+          "Expense"
+        ],
+        "summary": "Cadastra uma nova despesa",
+        "description": "Cadastra uma nova despesa para o usuário autenticado",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExpenseSchema"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Despesa cadastrada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Expense created successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": [
+                        "Invalid token",
+                        "Token malformatted"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno no servidor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unexpected error."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
     "schemas": {
       "SigninSchema": {
         "type": "object",
@@ -295,6 +475,28 @@
           "password": {
             "type": "string",
             "example": "123456"
+          }
+        }
+      },
+      "ExpenseSchema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Compra de supermercado"
+          },
+          "description": {
+            "type": "string",
+            "example": "Compra de supermercado"
+          },
+          "amount": {
+            "type": "number",
+            "example": 100.0
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "example": "2021-10-10"
           }
         }
       }

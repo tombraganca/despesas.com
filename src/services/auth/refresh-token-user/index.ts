@@ -1,6 +1,6 @@
 import { GenerateRefreshTokenProvider } from "../../../providers/implementations/GenerateRefreshTokenProvider";
 import { GenerateTokenProvider } from "../../../providers/implementations/GenerateTokenProvider";
-import { PostgresRefreshTokenRepository } from "../../../repositories/implementations/PostgresRefreshTokenRepository";
+import { PostgresRefreshTokenRepository } from "../../../repositories/implementations/PrismaRefreshTokenRepository";
 import { RefreshTokenUserController } from "./RefreshTokenUserController";
 import { RefreshTokenUserUseCase } from "./RefreshTokenUserUseCase";
 

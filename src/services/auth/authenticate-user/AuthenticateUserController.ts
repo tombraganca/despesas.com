@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { AuthenticateUserUseCase } from "./AuthenticateUserUseCase";
-import { HttpError } from "../../../handler/HttpErro";
+import { HttpException } from "../../../handler/HttpErro";
 
 export class AuthenticateUserController {
     constructor(private authenticateUserUseCase: AuthenticateUserUseCase) { }
@@ -12,8 +12,8 @@ export class AuthenticateUserController {
             const userAuth = await this.authenticateUserUseCase.execute({ email, password });
 
             return response.json({ ...userAuth });
-        } catch (err: HttpError | unknown) {
-            if(err instanceof HttpError){
+        } catch (err: HttpException | unknown) {
+            if(err instanceof HttpException){
 
                 return response.status(err.statusCode).json({
                     message: err.message
