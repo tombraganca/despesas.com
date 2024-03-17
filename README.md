@@ -19,6 +19,16 @@ Vamos lá!
 - JWT (JSON Web Tokens) para autenticação
 - Banco de dados (Prisma + MySQL)
 - Nodemailer para envio de e-mails
+<div style="display: inline_block">
+<img align="center" alt="Tom-Ts" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-plain.svg">
+<img align="center" alt="Express" height="30" width="30" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original.svg">
+<img align="center" alt="JWT" height="30" width="30" src="https://avatars.githubusercontent.com/u/84194169?s=48&v=4">
+<img align="center" alt="SQLite" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/sqlite/sqlite-plain.svg">
+<img align="center" alt="Prisma" height="30" width="30" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/prisma/prisma-original.svg">
+<img align="center" alt="Vite" height="30" width="30" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vite/vite-original.svg">
+
+
+</div>
 
 ### Instalação
 
