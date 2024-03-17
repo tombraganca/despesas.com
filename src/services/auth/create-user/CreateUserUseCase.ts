@@ -38,7 +38,7 @@ export class CreateUserUseCase {
         email: "despesadotcom@dev.com",
       },
       subject: "Seja bem-vindo à plataforma",
-      body: TEMPLATE_EMAIL,
+      body: TEMPLATE_EMAIL(data.name),
     });
   }
 
