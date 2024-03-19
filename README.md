@@ -49,6 +49,12 @@ npm install
 
 Renomeie o arquivo .env.example para .env e configure as variáveis de ambiente necessárias, como a conexão com o banco de dados, segredo para geração de tokens JWT e credenciais para envio de e-mails.
 
+5. Inicie o Banco de Dados:
+
+```bash
+npx prisma migrate dev && npx prisma generate
+```
+
 4. Inicie o servidor:
 
 ```bash
